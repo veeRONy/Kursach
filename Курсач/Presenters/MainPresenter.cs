@@ -25,6 +25,7 @@ namespace Курсач.Presenters
             this.mainView.ShowInfo += ShowInfo;
             this.mainView.ShowStartView += ShowStartView;
             this.mainView.ShowPartsView += ShowPartsView;
+            this.mainView.ShowOrgsView += ShowOrgsView;
         }
 
         private void ShowConfsView(object sender, EventArgs e)
@@ -57,12 +58,12 @@ namespace Курсач.Presenters
 
         }
 
-        //private void ShowOrgsView(object sender, EventArgs e)
-        //{
-        //    IConfView confview = ConfView.GetInstance((MainView)mainView);
-        //    IConfRepository repository = new ConfRepository(sqliteConnectionString);
-        //    new ConfPresenter(confview, repository);
+        private void ShowOrgsView(object sender, EventArgs e)
+        {
+            IOrgView orgview = OrgView.GetInstance((MainView)mainView);
+            IOrgRepository repository = new OrgRepository(sqliteConnectionString);
+            new OrgPresenter(orgview, repository);
 
-        //}
+        }
     }
 }

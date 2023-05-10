@@ -55,10 +55,13 @@
   <ItemGroup>
     <Compile Include="Models\ConfModel.cs" />
     <Compile Include="Models\IConfRepository.cs" />
+    <Compile Include="Models\IOrgRepository.cs" />
     <Compile Include="Models\IPartRepository.cs" />
+    <Compile Include="Models\OrgModel.cs" />
     <Compile Include="Models\ParticipantModel.cs" />
     <Compile Include="Presenters\ConfPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
+    <Compile Include="Presenters\OrgPresenter.cs" />
     <Compile Include="Presenters\ParticipantPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,12 +79,19 @@
     <Compile Include="Views\Info.Designer.cs">
       <DependentUpon>Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\IOrgView.cs" />
     <Compile Include="Views\IPartView.cs" />
     <Compile Include="Views\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrgView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\OrgView.Designer.cs">
+      <DependentUpon>OrgView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ParticipantsView.cs">
       <SubType>Form</SubType>
@@ -97,6 +107,7 @@
     </Compile>
     <Compile Include="_Repository\BaseRepository.cs" />
     <Compile Include="_Repository\ConfRepository.cs" />
+    <Compile Include="_Repository\OrgRepository.cs" />
     <Compile Include="_Repository\PartRepository.cs" />
     <None Include="Resources\users-alt.png" />
     <None Include="Resources\organizer.png" />
@@ -124,6 +135,9 @@
     <Content Include="ConfsDb.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Views\OrgView.resx">
+      <DependentUpon>OrgView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ParticipantsView.resx">
       <DependentUpon>ParticipantsView.cs</DependentUpon>
     </EmbeddedResource>

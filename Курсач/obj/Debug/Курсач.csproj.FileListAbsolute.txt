@@ -17,3 +17,4 @@ C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\obj\De
 C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\obj\Debug\Курсач.Views.Info.resources
 C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\obj\Debug\Курсач.Views.StartView.resources
 C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\obj\Debug\Курсач.Views.ParticipantsView.resources
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\obj\Debug\Курсач.Views.OrgView.resources
