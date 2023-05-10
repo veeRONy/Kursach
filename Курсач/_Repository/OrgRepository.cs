@@ -21,6 +21,7 @@ namespace Курсач._Repository
             using (SQLiteCommand command = new SQLiteCommand(connection))
             {
                 connection.Open();
+                command.Connection = connection;
                 command.CommandText = "INSERT INTO Organizers ('org_surname', 'org_name', 'org_email'," +
                     "'org_company', 'conf_id') values ('" +
                     orgModel.Org_surname + "' , '" + orgModel.Org_name + "' , '" +
