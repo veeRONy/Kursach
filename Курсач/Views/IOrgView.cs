@@ -14,7 +14,6 @@ namespace Курсач.Views
         string org_name { get; set; }
         string org_company { get; set; }
         string org_email { get; set; }
-        int conf_id { get; set; }
         string SearchValue { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccess { get; set; }

@@ -100,11 +100,6 @@ namespace Курсач.Views
             get { return tbOrgEmail.Text; }
             set { tbOrgEmail.Text = value; }
         }
-        public int conf_id 
-        {
-            get { return Convert.ToInt32(tbConf_ID.Text); }
-            set { tbConf_ID.Text = value.ToString(); }
-        }
         public string SearchValue 
         {
             get { return tbSearchOrg.Text; }

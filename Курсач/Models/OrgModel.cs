@@ -16,7 +16,6 @@ namespace Курсач.Models
         private string org_name;
         private string org_company;
         private string org_email;
-        private int conf_id;
 
         [DisplayName("ID")]
         public int Org_id { get => org_id; set => org_id = value; }
@@ -37,7 +36,5 @@ namespace Курсач.Models
         [Required(ErrorMessage = "Требуется e-mail")]
         public string Org_email { get => org_email; set => org_email = value; }
 
-        [DisplayName("ID конференции")]
-        public int Conf_id { get => conf_id; set => conf_id = value; }
     }
 }

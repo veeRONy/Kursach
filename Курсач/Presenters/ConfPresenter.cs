@@ -60,7 +60,7 @@ namespace Курсач.Presenters
         {
             confView.conf_id = 0;
             confView.conf_topic = "";
-            confView.conf_organizer_id = 0;
+            confView.conf_organizer_id = "";
             confView.conf_date = "";
             confView.conf_time = "";
             confView.conf_address = "";
@@ -152,7 +152,6 @@ namespace Курсач.Presenters
         {
             CleanViewFields();
             confView.IsEdit = false;
-
         }
 
 

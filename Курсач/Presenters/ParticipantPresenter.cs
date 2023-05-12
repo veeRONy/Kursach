@@ -9,6 +9,7 @@ using Курсач.Models;
 using Курсач.Views;
 using Курсач.Presenters;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace Курсач.Presenters
 {
@@ -17,13 +18,16 @@ namespace Курсач.Presenters
         private IPartView partView;
         private IPartRepository partRepository;
         private BindingSource partsbindingSource;
+        private BindingSource confpartbindingsource;
         private IEnumerable<ParticipantModel> partList;
+        private IEnumerable<Conf_Part_Model> confpartList;
 
         public ParticipantPresenter(IPartView partView, IPartRepository partRepository)
         {
             this.partView = partView;
             this.partRepository = partRepository;
             this.partsbindingSource = new BindingSource();
+            this.confpartbindingsource = new BindingSource();
 
 
             this.partView.SearchEvent += SearchPart;
@@ -32,11 +36,79 @@ namespace Курсач.Presenters
             this.partView.DeleteEvent += DeleteSelectedPart;
             this.partView.SaveEvent += SavePart;
             this.partView.CancelEvent += CancelAction;
+            this.partView.AddPartInConfEvent += AddPartInConf;
+            this.partView.DeleteRegEvent += DeleteReg;
+            this.partView.SaveRegEvent += SaveReg;
+            this.partView.CancelRegEvent += CancelReg;
 
-            this.partView.SetPartListBindingSource(partsbindingSource);
+            this.partView.SetPartListBindingSource(partsbindingSource, confpartbindingsource);
             LoadAllPartList();
+            LoadAllConfPartList();
             this.partView.Show();
+
         }
+
+        private void AddPartInConf(object sender, EventArgs e)
+        {
+            var participant = (ParticipantModel)partsbindingSource.Current;
+            partView.CONF_ID = "";
+            partView.TOPIC = "";
+            partView.PART_ID = participant.Participant_id;
+        }
+
+        private void CancelReg(object sender, EventArgs e)
+        {
+            partView.CONF_ID = "";
+            partView.TOPIC = "";
+            partView.PART_ID = 0;
+        }
+
+        private void SaveReg(object sender, EventArgs e)
+        {
+            var model = new Conf_Part_Model();
+            model.Part_id = partView.PART_ID;
+            model.Conf_id = partView.CONF_ID;
+            model.Topic = partView.TOPIC;
+
+            try
+            {
+                Validate(model);
+                partRepository.AddReg(model);
+                partView.Message = "Участник успешно зарегистрирован.";
+                partView.IsSuccess = true;
+                LoadAllConfPartList();
+            }
+            catch(Exception ex)
+            {
+                partView.IsSuccess = false;
+                partView.Message = ex.Message;
+            }
+        }
+
+        private void LoadAllConfPartList()
+        {
+            confpartList = partRepository.GetAllConfPart();
+            confpartbindingsource.DataSource = confpartList;
+        }
+
+        private void DeleteReg(object sender, EventArgs e)
+        {
+            try
+            {
+                var model = (Conf_Part_Model)confpartbindingsource.Current;
+                partRepository.DeleteReg(model.Part_id, Convert.ToInt32(model.Conf_id), model.Topic);
+                partView.IsSuccess = true;
+                partView.Message = "Регистрация участника успешно отменена.";
+                LoadAllConfPartList();
+            }
+            catch (Exception ex)
+            {
+                partView.IsSuccess = false;
+                partView.Message = "Ошибка! Регистрация участника не была отменена.";
+            }
+
+        }
+
 
         private void LoadAllPartList()
         {
@@ -54,9 +126,7 @@ namespace Курсач.Presenters
             partView.part_id = 0;
             partView.part_surname = "";
             partView.part_name = "";
-            partView.part_topic = "";
             partView.part_email = "";
-            partView.conf_ID = 0;
         }
 
         private void SavePart(object sender, EventArgs e)
@@ -65,9 +135,7 @@ namespace Курсач.Presenters
             model.Participant_id = partView.part_id;
             model.Participant_surname = partView.part_surname;
             model.Participant_name = partView.part_name;
-            model.Topic = partView.part_topic;
             model.Participant_email = partView.part_email;
-            model.Conf_id = partView.conf_ID;
 
 
             try
@@ -93,7 +161,7 @@ namespace Курсач.Presenters
             }
         }
 
-        private void Validate(ParticipantModel model)
+        private void Validate(object model)
         {
             string errorMessage = "";
             List<ValidationResult> results = new List<ValidationResult>();
@@ -106,6 +174,8 @@ namespace Курсач.Presenters
                 throw new Exception(errorMessage);
             }
         }
+
+        
 
         private void DeleteSelectedPart(object sender, EventArgs e)
         {
@@ -130,9 +200,7 @@ namespace Курсач.Presenters
             partView.part_id = participant.Participant_id;
             partView.part_surname = participant.Participant_surname;
             partView.part_name = participant.Participant_name;
-            partView.part_topic = participant.Topic;
             partView.part_email = participant.Participant_email;
-            partView.conf_ID = participant.Conf_id;
             partView.IsEdit = true;
         }
 

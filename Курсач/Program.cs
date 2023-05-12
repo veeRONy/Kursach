@@ -27,7 +27,6 @@ namespace Курсач
            
             new MainPresenter(view, sqliteConnectionString);
 
-
             Application.Run((Form)view);
         }
     }

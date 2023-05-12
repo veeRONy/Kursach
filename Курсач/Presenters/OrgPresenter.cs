@@ -31,7 +31,7 @@ namespace Курсач.Presenters
             this.orgView.SaveEvent += SaveOrg;
             this.orgView.CancelEvent += CancelAction;
 
-
+            orgView.IsEdit = false;
 
             this.orgView.SetOrgsListBindingSource(orgsbindingSource);
             LoadAllOrgList();
@@ -50,7 +50,6 @@ namespace Курсач.Presenters
             orgView.org_name = "";
             orgView.org_company = "";
             orgView.org_email = "";
-            orgView.conf_id = 0;
         }
 
         private void SaveOrg(object sender, EventArgs e)
@@ -61,7 +60,6 @@ namespace Курсач.Presenters
             model.Org_name = orgView.org_name;
             model.Org_company = orgView.org_company;
             model.Org_email = orgView.org_email;
-            model.Conf_id = orgView.conf_id;
 
             try
             {
@@ -125,7 +123,6 @@ namespace Курсач.Presenters
             orgView.org_name = org.Org_name;
             orgView.org_company = org.Org_company;
             orgView.org_email = org.Org_email;
-            orgView.conf_id = org.Conf_id;
             orgView.IsEdit = true;
         }
 

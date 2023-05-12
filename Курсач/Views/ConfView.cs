@@ -11,6 +11,7 @@ using Курсач.Models;
 using Курсач.Views;
 using Курсач.Presenters;
 using Курсач._Repository;
+using System.Configuration;
 
 
 namespace Курсач.Views
@@ -37,10 +38,14 @@ namespace Курсач.Views
             btnSearch.Click += delegate { SearchEvent?.Invoke(this, EventArgs.Empty); };
 
             btnAdd.Click += delegate 
-            { 
+            {
+
                 AddEvent?.Invoke(this, EventArgs.Empty);
                 tabControlDB.TabPages.Remove(tabPageConfs);
                 tabControlDB.TabPages.Add(tabPageConfDetail);
+                GetOrgs();
+
+
             };
 
             btnEdit.Click += delegate 
@@ -48,6 +53,7 @@ namespace Курсач.Views
                 EditEvent?.Invoke(this, EventArgs.Empty);
                 tabControlDB.TabPages.Remove(tabPageConfs);
                 tabControlDB.TabPages.Add(tabPageConfDetail);
+                GetOrgs();
 
             };
             btnDelete.Click += delegate 
@@ -82,10 +88,21 @@ namespace Курсач.Views
             {
                 if (e.KeyCode == Keys.Enter)
                     SearchEvent?.Invoke(this, EventArgs.Empty);
-            };
+            }; 
 
-            
+        }
 
+        public void GetOrgs()
+        {
+            var orgList = new List<OrgModel>();
+            IConfRepository confRepository = new ConfRepository(ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString);
+            orgList = (List<OrgModel>)confRepository.GetAllOrganizers();
+
+            cbOrgs.Items.Clear();
+            foreach (var org in orgList)
+            {
+                cbOrgs.Items.Add(org.Org_id);
+            }
         }
 
         public int conf_id {
@@ -96,9 +113,14 @@ namespace Курсач.Views
             get { return tbConfTopic.Text; }
             set { tbConfTopic.Text = value; }
         }
-        public int conf_organizer_id {
-            get { return Convert.ToInt32(tbConfOrg.Text); }
-            set { tbConfOrg.Text = value.ToString(); }
+        public string conf_organizer_id {
+            get
+            {
+                //return int.TryParse(cbOrgs.Text, out _) ? Convert.ToInt32(cbOrgs.Text) : 1;     
+                return cbOrgs.Text;
+            }   
+            
+            set { cbOrgs.Text = value; }
         }
         public string conf_date {
             get { return tbConfDate.Text; }
@@ -112,7 +134,7 @@ namespace Курсач.Views
             get { return tbConfAddress.Text; }
             set { tbConfAddress.Text = value; }
         }
-        
+
         public int max_num_of_participants {
             get { return Convert.ToInt32(tbConfMax.Text); }
             set { tbConfMax.Text = value.ToString(); }

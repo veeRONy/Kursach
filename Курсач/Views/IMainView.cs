@@ -8,7 +8,6 @@ namespace Курсач.Views
 {
     public interface IMainView
     {
-        event EventHandler ShowStartView;
         event EventHandler ShowInfo;
         event EventHandler ShowConfsView;
         event EventHandler ShowPartsView;

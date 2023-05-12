@@ -21,11 +21,10 @@ namespace Курсач._Repository
             using (SQLiteCommand command = new SQLiteCommand(connection))
             {
                 connection.Open();
-                command.Connection = connection;
                 command.CommandText = "INSERT INTO Organizers ('org_surname', 'org_name', 'org_email'," +
-                    "'org_company', 'conf_id') values ('" +
+                    "'org_company') values ('" +
                     orgModel.Org_surname + "' , '" + orgModel.Org_name + "' , '" +
-                    orgModel.Org_email + "' , '" + orgModel.Org_company + "' , '" + orgModel.Conf_id + "')";
+                    orgModel.Org_email + "' , '" + orgModel.Org_company + "')";
                 command.ExecuteNonQuery();
             }
         }
@@ -39,6 +38,53 @@ namespace Курсач._Repository
                 connection.Open();
                 command.ExecuteNonQuery();
             }
+
+            var confList = new List<ConfModel>();
+            query = $"SELECT * FROM Conferences WHERE conf_organizer_id="+id;
+            using (var connection = new SQLiteConnection(connectionString))
+            using (SQLiteCommand command = new SQLiteCommand(query, connection))
+            {
+                connection.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var confModel = new ConfModel();
+                        confModel.Conf_id = Convert.ToInt32(reader[0]);
+                        confModel.Conf_topic = reader[1].ToString();
+                        confModel.Conf_date = reader[2].ToString();
+                        confModel.Conf_time = reader[3].ToString();
+                        confModel.Conf_address = reader[4].ToString();
+                        confModel.Curr_num_of_participants = Convert.ToInt32(reader[5]);
+                        confModel.Max_num_of_participants = Convert.ToInt32(reader[6]);
+                        confModel.Conf_organizer_id = reader[7].ToString();
+                        confList.Add(confModel);
+                    }
+                }
+            }
+
+            query = $"DELETE FROM Conferences WHERE conf_organizer_id=" + id;
+            using (var connection = new SQLiteConnection(connectionString))
+            using (SQLiteCommand command = new SQLiteCommand(query, connection))
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+
+            foreach(var confModel in confList)
+            {
+                query = $"DELETE FROM Conf_participant WHERE conf_id=" + confModel.Conf_id;
+                using (var connection = new SQLiteConnection(connectionString))
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.ExecuteNonQuery();
+                }
+            }
+
+
         }
 
         public void Edit(OrgModel orgModel)
@@ -46,7 +92,7 @@ namespace Курсач._Repository
             string query = $"UPDATE Organizers SET org_surname='" + orgModel.Org_surname + "', " +
                 "org_name='" + orgModel.Org_name + "', " +
                 "org_email='" + orgModel.Org_email + "', " +
-                "org_company='" + orgModel.Org_company + "', " + "conf_id=" + orgModel.Conf_id +
+                "org_company='" + orgModel.Org_company + "', " + 
                 " WHERE org_id=" + orgModel.Org_id;
             using (var connection = new SQLiteConnection(connectionString))
             using (SQLiteCommand command = new SQLiteCommand(query, connection))
@@ -77,7 +123,6 @@ namespace Курсач._Repository
                         orgModel.Org_name = reader[2].ToString();
                         orgModel.Org_company = reader[3].ToString();
                         orgModel.Org_email = reader[4].ToString();
-                        orgModel.Conf_id = Convert.ToInt32(reader[5]);
                         orgList.Add(orgModel);
                     }
                 }
@@ -94,7 +139,6 @@ namespace Курсач._Repository
             using (SQLiteCommand command = new SQLiteCommand(connection))
             {
                 connection.Open();
-                command.Connection = connection;
                 command.CommandText = @"SELECT * FROM Organizers WHERE org_id=@id ORDER BY org_id ASC";
                 command.Parameters.Add("@id", System.Data.DbType.Int32).Value = orgID;
 
@@ -108,7 +152,6 @@ namespace Курсач._Repository
                         orgModel.Org_name = reader[2].ToString();
                         orgModel.Org_company = reader[3].ToString();
                         orgModel.Org_email = reader[4].ToString();
-                        orgModel.Conf_id = Convert.ToInt32(reader[5]);
                         orgList.Add(orgModel);
                     }
                 }

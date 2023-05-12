@@ -14,7 +14,7 @@ namespace Курсач.Models
         // поля из бд
         private int conf_id;
         private string conf_topic;
-        private int conf_organizer_id;
+        private string conf_organizer_id;
         private string conf_date;
         private string conf_time;
         private string conf_address;
@@ -30,9 +30,9 @@ namespace Курсач.Models
         public string Conf_topic { get => conf_topic; set => conf_topic = value; }
 
 
-        [DisplayName("ID Организатора")]
-        [Required(ErrorMessage = "Требуется ID Организатора")]
-        public int Conf_organizer_id { get => conf_organizer_id; set => conf_organizer_id = value; }
+        [DisplayName("ID организатора")]
+        [Required(ErrorMessage = "Требуется ID организатора")]
+        public string Conf_organizer_id { get => conf_organizer_id; set => conf_organizer_id = value; }
 
 
         [DisplayName("Дата")]

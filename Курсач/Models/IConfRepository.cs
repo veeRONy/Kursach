@@ -12,6 +12,8 @@ namespace Курсач.Models
         void Edit(ConfModel confModel);
         void Delete(int id);
         IEnumerable<ConfModel> GetAll();
+        IEnumerable<OrgModel> GetAllOrganizers();
+        IEnumerable<ConfModel> GetAllConfs();
         IEnumerable<ConfModel> GetByValue(string value);
     }
 }

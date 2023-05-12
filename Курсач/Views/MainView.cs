@@ -14,7 +14,6 @@ namespace Курсач.Views
     {
         private Button currentBtn;
 
-        public event EventHandler ShowStartView;
         public event EventHandler ShowInfo;
         public event EventHandler ShowConfsView;
         public event EventHandler ShowPartsView;
@@ -23,24 +22,11 @@ namespace Курсач.Views
         public MainView()
         {
             InitializeComponent();
-            btnDB.Click += delegate { 
+            btnDB.Click += delegate {
                 ShowConfsView?.Invoke(this, EventArgs.Empty);
                 labelTitle.Text = "Конференции";
                 ActivateButton(btnDB);
-            };
 
-            btnInfo.Click += delegate 
-            {
-                ShowInfo?.Invoke(this, EventArgs.Empty);
-                labelTitle.Text = "Справка";
-                ActivateButton(btnInfo);
-            };
-
-            btnConfs.Click += delegate
-            {
-                ShowStartView?.Invoke(this, EventArgs.Empty);
-                labelTitle.Text = "Меню";
-                ActivateButton(btnConfs);
             };
 
             btnParticipants.Click += delegate
@@ -48,6 +34,7 @@ namespace Курсач.Views
                 ShowPartsView?.Invoke(this, EventArgs.Empty);
                 labelTitle.Text = "Участники";
                 ActivateButton(btnParticipants);
+
             };
 
             btnOrganizers.Click += delegate
@@ -55,13 +42,20 @@ namespace Курсач.Views
                 ShowOrgsView?.Invoke(this, EventArgs.Empty);
                 labelTitle.Text = "Организаторы";
                 ActivateButton(btnOrganizers);
+             
             };
 
-            labelTitle.Text = "Меню";
-            StartView startView = StartView.GetInstance((MainView)this);
-            startView.MdiParent = (Form)this;
-            startView.Show();
-            ActivateButton(btnConfs);
+            btnInfo.Click += delegate
+            {
+                ShowInfo?.Invoke(this, EventArgs.Empty);
+                labelTitle.Text = "Справка";
+                ActivateButton(btnInfo);
+
+            };
+
+            labelTitle.Text = "Конференции";
+            ActivateButton(btnDB);
+
         }
 
         private void ActivateButton(object btnsender)
@@ -85,7 +79,6 @@ namespace Курсач.Views
                 }
             }
         }
-
-        
     }
+
 }

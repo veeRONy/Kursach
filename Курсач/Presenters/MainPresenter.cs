@@ -22,18 +22,11 @@ namespace Курсач.Presenters
             this.mainView = mainView;
             this.sqliteConnectionString = sqliteConnectionString;
             this.mainView.ShowConfsView += ShowConfsView;
-            this.mainView.ShowInfo += ShowInfo;
-            this.mainView.ShowStartView += ShowStartView;
             this.mainView.ShowPartsView += ShowPartsView;
             this.mainView.ShowOrgsView += ShowOrgsView;
-        }
+            this.mainView.ShowInfo += ShowInfo;
 
-        private void ShowConfsView(object sender, EventArgs e)
-        {
-            IConfView confview = ConfView.GetInstance((MainView)mainView);
-            IConfRepository repository = new ConfRepository(sqliteConnectionString);
-            new ConfPresenter(confview, repository);
-            
+            ShowConfsView(this, EventArgs.Empty);
         }
 
         private void ShowInfo(object sender, EventArgs e)
@@ -43,11 +36,12 @@ namespace Курсач.Presenters
             infoForm.Show();
         }
 
-        private void ShowStartView(object sender, EventArgs e)
+        private void ShowConfsView(object sender, EventArgs e)
         {
-            StartView startView = StartView.GetInstance((MainView)mainView);
-            startView.MdiParent = (Form)mainView;
-            startView.Show();
+            IConfView confView = ConfView.GetInstance((MainView)mainView);
+            IConfRepository repository = new ConfRepository(sqliteConnectionString);
+            new ConfPresenter(confView, repository);
+            
         }
 
         private void ShowPartsView(object sender, EventArgs e)

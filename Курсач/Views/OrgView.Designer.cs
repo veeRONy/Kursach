@@ -38,8 +38,11 @@
             this.tbSearchOrg = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageOrgDetail = new System.Windows.Forms.TabPage();
-            this.tbConf_ID = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.tbOrgEmail = new System.Windows.Forms.TextBox();
+            this.tbOrgName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbOrgSurname = new System.Windows.Forms.TextBox();
             this.tbOrgID = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnCancelOrg = new System.Windows.Forms.Button();
@@ -47,11 +50,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.tbCompany = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.tbOrgName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbOrgSurname = new System.Windows.Forms.TextBox();
-            this.tbOrgEmail = new System.Windows.Forms.TextBox();
             this.tabControlOrgs.SuspendLayout();
             this.tabPageOrgs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrgs)).BeginInit();
@@ -91,7 +89,6 @@
             // 
             this.dataGridViewOrgs.AllowUserToAddRows = false;
             this.dataGridViewOrgs.AllowUserToDeleteRows = false;
-            this.dataGridViewOrgs.AllowUserToResizeColumns = false;
             this.dataGridViewOrgs.AllowUserToResizeRows = false;
             this.dataGridViewOrgs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -190,8 +187,6 @@
             this.tabPageOrgDetail.Controls.Add(this.label2);
             this.tabPageOrgDetail.Controls.Add(this.label3);
             this.tabPageOrgDetail.Controls.Add(this.tbOrgSurname);
-            this.tabPageOrgDetail.Controls.Add(this.tbConf_ID);
-            this.tabPageOrgDetail.Controls.Add(this.label7);
             this.tabPageOrgDetail.Controls.Add(this.tbOrgID);
             this.tabPageOrgDetail.Controls.Add(this.label6);
             this.tabPageOrgDetail.Controls.Add(this.btnCancelOrg);
@@ -206,26 +201,56 @@
             this.tabPageOrgDetail.Text = "Организатор";
             this.tabPageOrgDetail.UseVisualStyleBackColor = true;
             // 
-            // tbConf_ID
+            // tbOrgEmail
             // 
-            this.tbConf_ID.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbConf_ID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbConf_ID.Location = new System.Drawing.Point(458, 51);
-            this.tbConf_ID.Name = "tbConf_ID";
-            this.tbConf_ID.Size = new System.Drawing.Size(166, 27);
-            this.tbConf_ID.TabIndex = 38;
+            this.tbOrgEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbOrgEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbOrgEmail.Location = new System.Drawing.Point(245, 191);
+            this.tbOrgEmail.Name = "tbOrgEmail";
+            this.tbOrgEmail.Size = new System.Drawing.Size(379, 27);
+            this.tbOrgEmail.TabIndex = 47;
             // 
-            // label7
+            // tbOrgName
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(6)))), ((int)(((byte)(53)))));
-            this.label7.Location = new System.Drawing.Point(454, 28);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(151, 20);
-            this.label7.TabIndex = 37;
-            this.label7.Text = "ID конференции:";
+            this.tbOrgName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbOrgName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbOrgName.Location = new System.Drawing.Point(458, 121);
+            this.tbOrgName.Name = "tbOrgName";
+            this.tbOrgName.Size = new System.Drawing.Size(166, 27);
+            this.tbOrgName.TabIndex = 46;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(6)))), ((int)(((byte)(53)))));
+            this.label2.Location = new System.Drawing.Point(454, 98);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 20);
+            this.label2.TabIndex = 45;
+            this.label2.Text = "Имя:";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(6)))), ((int)(((byte)(53)))));
+            this.label3.Location = new System.Drawing.Point(241, 98);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 20);
+            this.label3.TabIndex = 44;
+            this.label3.Text = "Фамилия:";
+            // 
+            // tbOrgSurname
+            // 
+            this.tbOrgSurname.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbOrgSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbOrgSurname.Location = new System.Drawing.Point(245, 121);
+            this.tbOrgSurname.Name = "tbOrgSurname";
+            this.tbOrgSurname.Size = new System.Drawing.Size(168, 27);
+            this.tbOrgSurname.TabIndex = 43;
             // 
             // tbOrgID
             // 
@@ -313,57 +338,6 @@
             this.label15.TabIndex = 24;
             this.label15.Text = "Организация:";
             // 
-            // tbOrgName
-            // 
-            this.tbOrgName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbOrgName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbOrgName.Location = new System.Drawing.Point(458, 121);
-            this.tbOrgName.Name = "tbOrgName";
-            this.tbOrgName.Size = new System.Drawing.Size(166, 27);
-            this.tbOrgName.TabIndex = 46;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(6)))), ((int)(((byte)(53)))));
-            this.label2.Location = new System.Drawing.Point(454, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 20);
-            this.label2.TabIndex = 45;
-            this.label2.Text = "Имя:";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(6)))), ((int)(((byte)(53)))));
-            this.label3.Location = new System.Drawing.Point(241, 98);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 20);
-            this.label3.TabIndex = 44;
-            this.label3.Text = "Фамилия:";
-            // 
-            // tbOrgSurname
-            // 
-            this.tbOrgSurname.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbOrgSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbOrgSurname.Location = new System.Drawing.Point(245, 121);
-            this.tbOrgSurname.Name = "tbOrgSurname";
-            this.tbOrgSurname.Size = new System.Drawing.Size(168, 27);
-            this.tbOrgSurname.TabIndex = 43;
-            // 
-            // tbOrgEmail
-            // 
-            this.tbOrgEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbOrgEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbOrgEmail.Location = new System.Drawing.Point(245, 191);
-            this.tbOrgEmail.Name = "tbOrgEmail";
-            this.tbOrgEmail.Size = new System.Drawing.Size(379, 27);
-            this.tbOrgEmail.TabIndex = 47;
-            // 
             // OrgView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -394,8 +368,6 @@
         private System.Windows.Forms.TextBox tbSearchOrg;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPageOrgDetail;
-        private System.Windows.Forms.TextBox tbConf_ID;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbOrgID;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnCancelOrg;

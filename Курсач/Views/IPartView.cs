@@ -12,14 +12,17 @@ namespace Курсач.Views
         int part_id { get; set; }
         string part_surname { get; set; }
         string part_name { get; set; }
-        string part_topic { get; set; }
         string part_email { get; set; }
-        int conf_ID { get; set; }
        
         string SearchValue { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccess { get; set; }
         string Message { get; set; }
+
+
+        string CONF_ID { get; set; }
+        int PART_ID { get; set; }
+        string TOPIC { get; set; }
 
 
         event EventHandler SearchEvent;
@@ -28,8 +31,13 @@ namespace Курсач.Views
         event EventHandler DeleteEvent;
         event EventHandler SaveEvent;
         event EventHandler CancelEvent;
+        event EventHandler DeleteRegEvent;
+        event EventHandler SaveRegEvent;
+        event EventHandler CancelRegEvent;
+        event EventHandler AddPartInConfEvent;
 
-        void SetPartListBindingSource(BindingSource confList);
+
+        void SetPartListBindingSource(BindingSource partList, BindingSource confpartList);
         void Show();
     }
 }

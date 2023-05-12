@@ -42,7 +42,6 @@
             this.tbConfDate = new System.Windows.Forms.MaskedTextBox();
             this.tbConfMax = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.tbConfOrg = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbConfID = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,6 +53,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.tbConfTopic = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.cbOrgs = new System.Windows.Forms.ComboBox();
             this.tabControlDB.SuspendLayout();
             this.tabPageConfs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConfs)).BeginInit();
@@ -93,7 +93,6 @@
             // 
             this.dataGridViewConfs.AllowUserToAddRows = false;
             this.dataGridViewConfs.AllowUserToDeleteRows = false;
-            this.dataGridViewConfs.AllowUserToResizeColumns = false;
             this.dataGridViewConfs.AllowUserToResizeRows = false;
             this.dataGridViewConfs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -187,11 +186,11 @@
             // 
             // tabPageConfDetail
             // 
+            this.tabPageConfDetail.Controls.Add(this.cbOrgs);
             this.tabPageConfDetail.Controls.Add(this.tbConfTime);
             this.tabPageConfDetail.Controls.Add(this.tbConfDate);
             this.tabPageConfDetail.Controls.Add(this.tbConfMax);
             this.tabPageConfDetail.Controls.Add(this.label17);
-            this.tabPageConfDetail.Controls.Add(this.tbConfOrg);
             this.tabPageConfDetail.Controls.Add(this.label7);
             this.tabPageConfDetail.Controls.Add(this.tbConfID);
             this.tabPageConfDetail.Controls.Add(this.label6);
@@ -238,7 +237,7 @@
             this.tbConfMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbConfMax.Location = new System.Drawing.Point(246, 344);
             this.tbConfMax.Name = "tbConfMax";
-            this.tbConfMax.Size = new System.Drawing.Size(159, 27);
+            this.tbConfMax.Size = new System.Drawing.Size(167, 27);
             this.tbConfMax.TabIndex = 40;
             // 
             // label17
@@ -252,15 +251,6 @@
             this.label17.Size = new System.Drawing.Size(163, 20);
             this.label17.TabIndex = 39;
             this.label17.Text = "Макс. количество:";
-            // 
-            // tbConfOrg
-            // 
-            this.tbConfOrg.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbConfOrg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbConfOrg.Location = new System.Drawing.Point(459, 60);
-            this.tbConfOrg.Name = "tbConfOrg";
-            this.tbConfOrg.Size = new System.Drawing.Size(166, 27);
-            this.tbConfOrg.TabIndex = 38;
             // 
             // label7
             // 
@@ -393,6 +383,17 @@
             this.label16.TabIndex = 22;
             this.label16.Text = "Тема:";
             // 
+            // cbOrgs
+            // 
+            this.cbOrgs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbOrgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbOrgs.FormatString = "N0";
+            this.cbOrgs.FormattingEnabled = true;
+            this.cbOrgs.Location = new System.Drawing.Point(459, 59);
+            this.cbOrgs.Name = "cbOrgs";
+            this.cbOrgs.Size = new System.Drawing.Size(166, 28);
+            this.cbOrgs.TabIndex = 45;
+            // 
             // ConfView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -427,7 +428,6 @@
         private System.Windows.Forms.MaskedTextBox tbConfDate;
         private System.Windows.Forms.TextBox tbConfMax;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox tbConfOrg;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbConfID;
         private System.Windows.Forms.Label label6;
@@ -439,5 +439,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tbConfTopic;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox cbOrgs;
     }
 }

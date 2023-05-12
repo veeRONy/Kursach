@@ -15,8 +15,6 @@ namespace Курсач.Models
         private string participant_surname;
         private string participant_name;
         private string participant_email;
-        private string topic;
-        private int conf_id;
 
         [DisplayName("ID")]
         public int Participant_id { get => participant_id; set => participant_id = value; }
@@ -33,11 +31,5 @@ namespace Курсач.Models
         [Required(ErrorMessage = "Требуется e-mail")]
         public string Participant_email { get => participant_email; set => participant_email = value; }
 
-        [DisplayName("Тема доклада")]
-        [Required(ErrorMessage = "Требуется тема доклада")]
-        public string Topic { get => topic; set => topic = value; }
-
-        [DisplayName("ID конференции")]
-        public int Conf_id { get => conf_id; set => conf_id = value; }
     }
 }

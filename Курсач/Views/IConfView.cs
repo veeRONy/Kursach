@@ -11,7 +11,7 @@ namespace Курсач.Views
     {
         int conf_id { get; set; }
         string conf_topic { get; set; }
-        int conf_organizer_id { get; set; }
+        string conf_organizer_id { get; set; }
         string conf_date { get; set; }
         string conf_time { get; set; }
         string conf_address { get; set; }
