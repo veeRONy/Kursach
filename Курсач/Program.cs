@@ -24,12 +24,7 @@ namespace Курсач
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            string sqliteConnectionString = ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString;
-            IMainView view = new MainView();
-
-            new MainPresenter(view, sqliteConnectionString);
-
-            Application.Run((Form)view);
+            Application.Run(new MainForm());
         }
     }
 }
