@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Курсач._Repository;
+using Курсач.Models;
 
 namespace Курсач.Views
 {
@@ -15,6 +18,7 @@ namespace Курсач.Views
         private bool isSuccess;
         private string message;
         private bool isEdit;
+        
 
         public OrgView()
         {

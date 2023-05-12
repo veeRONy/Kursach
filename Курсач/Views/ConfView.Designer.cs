@@ -69,7 +69,7 @@
             this.tabControlDB.Location = new System.Drawing.Point(0, 0);
             this.tabControlDB.Name = "tabControlDB";
             this.tabControlDB.SelectedIndex = 0;
-            this.tabControlDB.Size = new System.Drawing.Size(837, 501);
+            this.tabControlDB.Size = new System.Drawing.Size(780, 501);
             this.tabControlDB.TabIndex = 1;
             // 
             // tabPageConfs
@@ -84,7 +84,7 @@
             this.tabPageConfs.Location = new System.Drawing.Point(4, 27);
             this.tabPageConfs.Name = "tabPageConfs";
             this.tabPageConfs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageConfs.Size = new System.Drawing.Size(829, 470);
+            this.tabPageConfs.Size = new System.Drawing.Size(772, 470);
             this.tabPageConfs.TabIndex = 0;
             this.tabPageConfs.Text = "Список конференций";
             this.tabPageConfs.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             this.dataGridViewConfs.ReadOnly = true;
             this.dataGridViewConfs.RowHeadersWidth = 51;
             this.dataGridViewConfs.RowTemplate.Height = 24;
-            this.dataGridViewConfs.Size = new System.Drawing.Size(645, 357);
+            this.dataGridViewConfs.Size = new System.Drawing.Size(588, 357);
             this.dataGridViewConfs.TabIndex = 9;
             // 
             // btnDelete
@@ -117,7 +117,7 @@
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDelete.Location = new System.Drawing.Point(672, 160);
+            this.btnDelete.Location = new System.Drawing.Point(615, 160);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(154, 33);
             this.btnDelete.TabIndex = 6;
@@ -131,7 +131,7 @@
             this.btnEdit.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEdit.Location = new System.Drawing.Point(672, 121);
+            this.btnEdit.Location = new System.Drawing.Point(615, 121);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(154, 33);
             this.btnEdit.TabIndex = 5;
@@ -145,7 +145,7 @@
             this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAdd.Location = new System.Drawing.Point(672, 82);
+            this.btnAdd.Location = new System.Drawing.Point(615, 82);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(154, 33);
             this.btnAdd.TabIndex = 4;
@@ -398,7 +398,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 501);
+            this.ClientSize = new System.Drawing.Size(780, 501);
             this.Controls.Add(this.tabControlDB);
             this.Name = "ConfView";
             this.Text = "База данных";

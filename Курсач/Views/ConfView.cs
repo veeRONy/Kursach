@@ -21,6 +21,7 @@ namespace Курсач.Views
         private string message;
         private bool isSuccess;
         private bool isEdit;
+        IRepository repository = new Repository(ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString);
 
         public event EventHandler SearchEvent;
         public event EventHandler AddEvent;
@@ -95,8 +96,8 @@ namespace Курсач.Views
         public void GetOrgs()
         {
             var orgList = new List<OrgModel>();
-            IConfRepository confRepository = new ConfRepository(ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString);
-            orgList = (List<OrgModel>)confRepository.GetAllOrganizers();
+            //IConfRepository confRepository = new Repository(ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString);
+            orgList = (List<OrgModel>)repository.GetAllOrganizers();
 
             cbOrgs.Items.Clear();
             foreach (var org in orgList)
@@ -115,8 +116,7 @@ namespace Курсач.Views
         }
         public string conf_organizer_id {
             get
-            {
-                //return int.TryParse(cbOrgs.Text, out _) ? Convert.ToInt32(cbOrgs.Text) : 1;     
+            {    
                 return cbOrgs.Text;
             }   
             

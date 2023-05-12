@@ -19,6 +19,7 @@ namespace Курсач.Views
         private string message;
         private bool isSuccess;
         private bool isEdit;
+        IRepository repository = new Repository(ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString);
 
         public ParticipantsView()
         {
@@ -249,8 +250,8 @@ namespace Курсач.Views
         public void GetConfs()
         {
             var confList = new List<ConfModel>();
-            IConfRepository confRepository = new ConfRepository(ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString);
-            confList = (List<ConfModel>)confRepository.GetAllConfs();
+            //IRepository confRepository = new Repository(ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString);
+            confList = (List<ConfModel>)repository.GetAllConfs();
 
             cbConfs.Items.Clear();
             foreach (var conf in confList)

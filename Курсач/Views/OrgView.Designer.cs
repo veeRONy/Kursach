@@ -65,7 +65,7 @@
             this.tabControlOrgs.Location = new System.Drawing.Point(0, 0);
             this.tabControlOrgs.Name = "tabControlOrgs";
             this.tabControlOrgs.SelectedIndex = 0;
-            this.tabControlOrgs.Size = new System.Drawing.Size(835, 483);
+            this.tabControlOrgs.Size = new System.Drawing.Size(780, 483);
             this.tabControlOrgs.TabIndex = 2;
             // 
             // tabPageOrgs
@@ -80,7 +80,7 @@
             this.tabPageOrgs.Location = new System.Drawing.Point(4, 27);
             this.tabPageOrgs.Name = "tabPageOrgs";
             this.tabPageOrgs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOrgs.Size = new System.Drawing.Size(827, 452);
+            this.tabPageOrgs.Size = new System.Drawing.Size(772, 452);
             this.tabPageOrgs.TabIndex = 0;
             this.tabPageOrgs.Text = "Список организаторов";
             this.tabPageOrgs.UseVisualStyleBackColor = true;
@@ -103,7 +103,7 @@
             this.dataGridViewOrgs.ReadOnly = true;
             this.dataGridViewOrgs.RowHeadersWidth = 51;
             this.dataGridViewOrgs.RowTemplate.Height = 24;
-            this.dataGridViewOrgs.Size = new System.Drawing.Size(643, 339);
+            this.dataGridViewOrgs.Size = new System.Drawing.Size(588, 339);
             this.dataGridViewOrgs.TabIndex = 9;
             // 
             // btnDeleteOrg
@@ -113,7 +113,7 @@
             this.btnDeleteOrg.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnDeleteOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteOrg.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDeleteOrg.Location = new System.Drawing.Point(670, 160);
+            this.btnDeleteOrg.Location = new System.Drawing.Point(615, 160);
             this.btnDeleteOrg.Name = "btnDeleteOrg";
             this.btnDeleteOrg.Size = new System.Drawing.Size(154, 33);
             this.btnDeleteOrg.TabIndex = 6;
@@ -127,7 +127,7 @@
             this.btnEditOrg.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnEditOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditOrg.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEditOrg.Location = new System.Drawing.Point(670, 121);
+            this.btnEditOrg.Location = new System.Drawing.Point(615, 121);
             this.btnEditOrg.Name = "btnEditOrg";
             this.btnEditOrg.Size = new System.Drawing.Size(154, 33);
             this.btnEditOrg.TabIndex = 5;
@@ -141,7 +141,7 @@
             this.btnAddOrg.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnAddOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddOrg.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAddOrg.Location = new System.Drawing.Point(670, 82);
+            this.btnAddOrg.Location = new System.Drawing.Point(615, 82);
             this.btnAddOrg.Name = "btnAddOrg";
             this.btnAddOrg.Size = new System.Drawing.Size(154, 33);
             this.btnAddOrg.TabIndex = 4;
@@ -342,7 +342,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 483);
+            this.ClientSize = new System.Drawing.Size(780, 483);
             this.Controls.Add(this.tabControlOrgs);
             this.Name = "OrgView";
             this.Text = "OrgView";

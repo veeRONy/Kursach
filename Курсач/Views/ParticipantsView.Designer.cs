@@ -81,7 +81,7 @@
             this.tabControlPart.Location = new System.Drawing.Point(0, 0);
             this.tabControlPart.Name = "tabControlPart";
             this.tabControlPart.SelectedIndex = 0;
-            this.tabControlPart.Size = new System.Drawing.Size(833, 450);
+            this.tabControlPart.Size = new System.Drawing.Size(783, 450);
             this.tabControlPart.TabIndex = 2;
             // 
             // tabPageParts
@@ -97,7 +97,7 @@
             this.tabPageParts.Location = new System.Drawing.Point(4, 27);
             this.tabPageParts.Name = "tabPageParts";
             this.tabPageParts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageParts.Size = new System.Drawing.Size(825, 419);
+            this.tabPageParts.Size = new System.Drawing.Size(775, 419);
             this.tabPageParts.TabIndex = 0;
             this.tabPageParts.Text = "Список участников";
             this.tabPageParts.UseVisualStyleBackColor = true;
@@ -120,7 +120,7 @@
             this.dataGridViewParticipants.ReadOnly = true;
             this.dataGridViewParticipants.RowHeadersWidth = 51;
             this.dataGridViewParticipants.RowTemplate.Height = 24;
-            this.dataGridViewParticipants.Size = new System.Drawing.Size(641, 306);
+            this.dataGridViewParticipants.Size = new System.Drawing.Size(591, 306);
             this.dataGridViewParticipants.TabIndex = 9;
             // 
             // btnDeletePart
@@ -130,7 +130,7 @@
             this.btnDeletePart.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnDeletePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeletePart.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDeletePart.Location = new System.Drawing.Point(668, 160);
+            this.btnDeletePart.Location = new System.Drawing.Point(618, 160);
             this.btnDeletePart.Name = "btnDeletePart";
             this.btnDeletePart.Size = new System.Drawing.Size(154, 33);
             this.btnDeletePart.TabIndex = 6;
@@ -144,7 +144,7 @@
             this.btnEditPart.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnEditPart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditPart.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEditPart.Location = new System.Drawing.Point(668, 121);
+            this.btnEditPart.Location = new System.Drawing.Point(618, 121);
             this.btnEditPart.Name = "btnEditPart";
             this.btnEditPart.Size = new System.Drawing.Size(154, 33);
             this.btnEditPart.TabIndex = 5;
@@ -158,7 +158,7 @@
             this.btnAddPart.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnAddPart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPart.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAddPart.Location = new System.Drawing.Point(668, 82);
+            this.btnAddPart.Location = new System.Drawing.Point(618, 82);
             this.btnAddPart.Name = "btnAddPart";
             this.btnAddPart.Size = new System.Drawing.Size(154, 33);
             this.btnAddPart.TabIndex = 4;
@@ -340,7 +340,7 @@
             this.btnReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnReg.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnReg.Location = new System.Drawing.Point(668, 199);
+            this.btnReg.Location = new System.Drawing.Point(618, 199);
             this.btnReg.Name = "btnReg";
             this.btnReg.Size = new System.Drawing.Size(154, 33);
             this.btnReg.TabIndex = 10;
@@ -510,7 +510,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 450);
+            this.ClientSize = new System.Drawing.Size(783, 450);
             this.Controls.Add(this.tabControlPart);
             this.Name = "ParticipantsView";
             this.Text = "ParticipantsView";
