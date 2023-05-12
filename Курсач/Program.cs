@@ -8,6 +8,7 @@ using Курсач.Views;
 using Курсач.Presenters;
 using Курсач._Repository;
 using System.Configuration;
+using System.ComponentModel.Design;
 
 namespace Курсач
 {
@@ -17,6 +18,7 @@ namespace Курсач
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
+
         static void Main()
         {
             Application.EnableVisualStyles();
@@ -24,7 +26,7 @@ namespace Курсач
 
             string sqliteConnectionString = ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString;
             IMainView view = new MainView();
-           
+
             new MainPresenter(view, sqliteConnectionString);
 
             Application.Run((Form)view);

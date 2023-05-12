@@ -17,3 +17,12 @@ C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\obj\De
 C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\obj\Debug\Курсач.Views.Info.resources
 C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\obj\Debug\Курсач.Views.ParticipantsView.resources
 C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\obj\Debug\Курсач.Views.OrgView.resources
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\bin\Debug\SQLitePCLRaw.core.dll
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\bin\Debug\System.Buffers.dll
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\bin\Debug\System.Memory.dll
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\bin\Debug\System.Buffers.xml
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\bin\Debug\System.Memory.xml
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\user\Desktop\Учеба\с# проги\Курсач\Курсач\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
