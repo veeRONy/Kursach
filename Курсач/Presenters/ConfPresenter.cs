@@ -10,18 +10,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Курсач.Presenters
 {
-    public class ConfPresenter
+    public class ConfPresenter: Presenter
     {
         private IConfView confView;
-        private IConfRepository confRepository;
+        private IRepository repository;
         private BindingSource confsbindingSource;
         private IEnumerable<ConfModel> confList;
 
-        public ConfPresenter(IConfView confView, IConfRepository confRepository)
+        public ConfPresenter(IConfView confView, IRepository repository)
         {
             this.confsbindingSource = new BindingSource();
             this.confView = confView;
-            this.confRepository = confRepository;
+            this.repository = repository;
             this.confView.SearchEvent += SearchConf;
             this.confView.AddEvent += AddConf;
             this.confView.EditEvent += LoadSelectedConfToEdit;
@@ -29,7 +29,7 @@ namespace Курсач.Presenters
             this.confView.SaveEvent += SaveConf;
             this.confView.CancelEvent += CancelAction;
 
-
+            
 
             this.confView.SetConfsListBindingSource(confsbindingSource);
             LoadAllConfList();
@@ -38,22 +38,8 @@ namespace Курсач.Presenters
 
         private void LoadAllConfList()
         {
-            confList = confRepository.GetAll();
+            confList = repository.GetAllConfs();
             confsbindingSource.DataSource = confList;
-        }
-
-        public void Validate(object model)
-        {
-            string errorMessage = "";
-            List<ValidationResult> results= new List<ValidationResult>();
-            ValidationContext context = new ValidationContext(model);
-            bool isValid = Validator.TryValidateObject(model, context, results, true);
-            if (isValid == false)
-            {
-                foreach (var item in results)
-                    errorMessage += "- " + item.ErrorMessage + "\n";
-                throw new Exception(errorMessage);
-            }
         }
 
         private void CleanViewFields()
@@ -72,10 +58,10 @@ namespace Курсач.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(this.confView.SearchValue);
             if (emptyValue == false)
             {
-                confList = confRepository.GetByValue(this.confView.SearchValue);
+                confList = repository.GetByValueConfs(this.confView.SearchValue);
             }
             else
-                confList = confRepository.GetAll();
+                confList = repository.GetAllConfs();
             confsbindingSource.DataSource = confList;
         }
 
@@ -100,22 +86,24 @@ namespace Курсач.Presenters
                 Validate(model);
                 if (confView.IsEdit)
                 {
-                    confRepository.Edit(model);
+                    repository.EditConf(model);
                     confView.Message = "Конференция успешно изменена.";
                 }
                 else
                 {
-                    confRepository.Add(model);
+                    repository.AddConf(model);
                     confView.Message = "Конференция успешно добавлена.";
                 }
                 confView.IsSuccess=true;
                 LoadAllConfList();
+                return;
             }
             catch (Exception ex)
             {
                 confView.IsSuccess = false;
                 confView.Message = ex.Message;
             }
+            return;
         }
 
         private void DeleteSelectedConf(object sender, EventArgs e)
@@ -123,16 +111,20 @@ namespace Курсач.Presenters
             try
             {
                 var conf = (ConfModel)confsbindingSource.Current;
-                confRepository.Delete(conf.Conf_id);
+                
+                repository.DeleteConf(conf.Conf_id);
+                
                 confView.IsSuccess = true;
                 confView.Message = "Конференция успешно удалена.";
                 LoadAllConfList();
+                return;
             }
-            catch (Exception ex)
+            catch
             {
                 confView.IsSuccess = false;
                 confView.Message = "Ошибка! Конференция не была удалена.";
             }
+            return;
         }
 
         private void LoadSelectedConfToEdit(object sender, EventArgs e)

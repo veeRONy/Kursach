@@ -11,17 +11,17 @@ using Курсач.Views;
 
 namespace Курсач.Presenters
 {
-    public class OrgPresenter
+    public class OrgPresenter: Presenter
     {
         private IOrgView orgView;
-        private IOrgRepository orgRepository;
+        private IRepository repository;
         private BindingSource orgsbindingSource;
         private IEnumerable<OrgModel> orgList;
 
-        public OrgPresenter(IOrgView orgView, IOrgRepository orgRepository)
+        public OrgPresenter(IOrgView orgView, IRepository repository)
         {
             this.orgView = orgView;
-            this.orgRepository = orgRepository;
+            this.repository = repository;
             this.orgsbindingSource = new BindingSource();
 
             this.orgView.SearchEvent += SearchOrg;
@@ -66,12 +66,12 @@ namespace Курсач.Presenters
                 Validate(model);
                 if (orgView.IsEdit)
                 {
-                    orgRepository.Edit(model);
+                    repository.EditOrg(model);
                     orgView.Message = "Данные организатора успешно изменены.";
                 }
                 else
                 {
-                    orgRepository.Add(model);
+                    repository.AddOrg(model);
                     orgView.Message = "Организатор успешно добавлен.";
                 }
                 orgView.IsSuccess = true;
@@ -84,31 +84,17 @@ namespace Курсач.Presenters
             }
         }
 
-        private void Validate(OrgModel model)
-        {
-            string errorMessage = "";
-            List<ValidationResult> results = new List<ValidationResult>();
-            ValidationContext context = new ValidationContext(model);
-            bool isValid = Validator.TryValidateObject(model, context, results, true);
-            if (isValid == false)
-            {
-                foreach (var item in results)
-                    errorMessage += "- " + item.ErrorMessage + "\n";
-                throw new Exception(errorMessage);
-            }
-        }
-
         private void DeleteSelectedOrg(object sender, EventArgs e)
         {
             try
             {
                 var org = (OrgModel)orgsbindingSource.Current;
-                orgRepository.Delete(org.Org_id);
+                repository.DeleteOrg(org.Org_id);
                 orgView.IsSuccess = true;
                 orgView.Message = "Данные организатора успешно удалены.";
                 LoadAllOrgList();
             }
-            catch (Exception ex)
+            catch
             {
                 orgView.IsSuccess = false;
                 orgView.Message = "Ошибка! Данные организатора не были удалены.";
@@ -137,16 +123,16 @@ namespace Курсач.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(this.orgView.SearchValue);
             if (emptyValue == false)
             {
-                orgList = orgRepository.GetByValue(this.orgView.SearchValue);
+                orgList = repository.GetByValueOrgs(this.orgView.SearchValue);
             }
             else
-                orgList = orgRepository.GetAll();
+                orgList = repository.GetAllOrgs();
             orgsbindingSource.DataSource = orgList;
         }
 
         private void LoadAllOrgList()
         {
-            orgList = orgRepository.GetAll();
+            orgList = repository.GetAllOrgs();
             orgsbindingSource.DataSource = orgList;
         }
     }

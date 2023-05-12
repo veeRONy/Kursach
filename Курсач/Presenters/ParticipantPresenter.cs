@@ -13,19 +13,19 @@ using System.Reflection;
 
 namespace Курсач.Presenters
 {
-    public class ParticipantPresenter
+    public class ParticipantPresenter: Presenter
     {
         private IPartView partView;
-        private IPartRepository partRepository;
+        private IRepository repository;
         private BindingSource partsbindingSource;
         private BindingSource confpartbindingsource;
         private IEnumerable<ParticipantModel> partList;
         private IEnumerable<Conf_Part_Model> confpartList;
 
-        public ParticipantPresenter(IPartView partView, IPartRepository partRepository)
+        public ParticipantPresenter(IPartView partView, IRepository repository)
         {
             this.partView = partView;
-            this.partRepository = partRepository;
+            this.repository = repository;
             this.partsbindingSource = new BindingSource();
             this.confpartbindingsource = new BindingSource();
 
@@ -73,21 +73,23 @@ namespace Курсач.Presenters
             try
             {
                 Validate(model);
-                partRepository.AddReg(model);
+                repository.AddReg(model);
                 partView.Message = "Участник успешно зарегистрирован.";
                 partView.IsSuccess = true;
                 LoadAllConfPartList();
+                return;
             }
             catch(Exception ex)
             {
                 partView.IsSuccess = false;
                 partView.Message = ex.Message;
             }
+            return;
         }
 
         private void LoadAllConfPartList()
         {
-            confpartList = partRepository.GetAllConfPart();
+            confpartList = repository.GetAllConfPart();
             confpartbindingsource.DataSource = confpartList;
         }
 
@@ -96,23 +98,25 @@ namespace Курсач.Presenters
             try
             {
                 var model = (Conf_Part_Model)confpartbindingsource.Current;
-                partRepository.DeleteReg(model.Part_id, Convert.ToInt32(model.Conf_id), model.Topic);
+                repository.DeleteReg(model.Part_id, Convert.ToInt32(model.Conf_id), model.Topic);
                 partView.IsSuccess = true;
                 partView.Message = "Регистрация участника успешно отменена.";
                 LoadAllConfPartList();
+                return;
             }
-            catch (Exception ex)
+            catch
             {
                 partView.IsSuccess = false;
                 partView.Message = "Ошибка! Регистрация участника не была отменена.";
             }
+            return;
 
         }
 
 
         private void LoadAllPartList()
         {
-            partList = partRepository.GetAll();
+            partList = repository.GetAllParts();
             partsbindingSource.DataSource = partList;
         }
 
@@ -137,44 +141,30 @@ namespace Курсач.Presenters
             model.Participant_name = partView.part_name;
             model.Participant_email = partView.part_email;
 
-
             try
             {
                 Validate(model);
                 if (partView.IsEdit)
                 {
-                    partRepository.Edit(model);
+                    repository.EditPart(model);
                     partView.Message = "Данные участника успешно изменены.";
                 }
                 else
                 {
-                    partRepository.Add(model);
+                    repository.AddPart(model);
                     partView.Message = "Участник успешно добавлен.";
                 }
                 partView.IsSuccess = true;
                 LoadAllPartList();
+                return;
             }
             catch (Exception ex)
             {
                 partView.IsSuccess = false;
                 partView.Message = ex.Message;
             }
+            return;
         }
-
-        private void Validate(object model)
-        {
-            string errorMessage = "";
-            List<ValidationResult> results = new List<ValidationResult>();
-            ValidationContext context = new ValidationContext(model);
-            bool isValid = Validator.TryValidateObject(model, context, results, true);
-            if (isValid == false)
-            {
-                foreach (var item in results)
-                    errorMessage += "- " + item.ErrorMessage + "\n";
-                throw new Exception(errorMessage);
-            }
-        }
-
         
 
         private void DeleteSelectedPart(object sender, EventArgs e)
@@ -182,16 +172,19 @@ namespace Курсач.Presenters
             try
             {
                 var participant = (ParticipantModel)partsbindingSource.Current;
-                partRepository.Delete(participant.Participant_id);
+                repository.DeletePart(participant.Participant_id);
                 partView.IsSuccess = true;
                 partView.Message = "Данные участника успешно удалены.";
                 LoadAllPartList();
+                LoadAllConfPartList();
+                return;
             }
-            catch (Exception ex)
+            catch
             {
                 partView.IsSuccess = false;
                 partView.Message = "Ошибка! Участник не был удален.";
             }
+            return;
         }
 
         private void LoadSelectedPartToEdit(object sender, EventArgs e)
@@ -215,10 +208,10 @@ namespace Курсач.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(this.partView.SearchValue);
             if (emptyValue == false)
             {
-                partList = partRepository.GetByValue(this.partView.SearchValue);
+                partList = repository.GetByValueParts(this.partView.SearchValue);
             }
             else
-                partList = partRepository.GetAll();
+                partList = repository.GetAllParts();
             partsbindingSource.DataSource = partList;
         }
     }
