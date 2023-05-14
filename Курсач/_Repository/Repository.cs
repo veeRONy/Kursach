@@ -9,7 +9,7 @@ using Курсач._Repository;
 using System.Configuration;
 using System.Collections;
 using System.Data.SQLite;
-
+using System.Windows.Forms;
 
 namespace Курсач._Repository
 {
@@ -406,38 +406,44 @@ namespace Курсач._Repository
 
         public void AddReg(Conf_Part_Model confpartModel)
         {
-
-            using (var connection = new SQLiteConnection(connectionString))
+            int max = GetMaxNum(Convert.ToInt32(confpartModel.Conf_id));
+            int curr = GetCurrNum(Convert.ToInt32(confpartModel.Conf_id));
+            if (curr < max)
             {
-                connection.Open();
-                using (SQLiteCommand command = new SQLiteCommand(connection))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
-                    command.CommandText = @"INSERT INTO Conf_participant ('conf_id', 'participant_id', 'topic')" +
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+
+                        command.CommandText = @"INSERT INTO Conf_participant ('conf_id', 'participant_id', 'topic')" +
                         " values (@conf_id, @part_id, @topic)";
-                    command.Parameters.Add("@conf_id", System.Data.DbType.Int32).Value = Convert.ToInt32(confpartModel.Conf_id);
-                    command.Parameters.Add("@part_id", System.Data.DbType.Int32).Value = confpartModel.Part_id;
-                    command.Parameters.Add("@topic", System.Data.DbType.String).Value = confpartModel.Topic;
-                    command.ExecuteNonQuery();
+                        command.Parameters.Add("@conf_id", System.Data.DbType.Int32).Value = Convert.ToInt32(confpartModel.Conf_id);
+                        command.Parameters.Add("@part_id", System.Data.DbType.Int32).Value = confpartModel.Part_id;
+                        command.Parameters.Add("@topic", System.Data.DbType.String).Value = confpartModel.Topic;
+                        command.ExecuteNonQuery();
 
+                    }
+                    connection.Close();
                 }
-                connection.Close();
-            }
 
 
-            var confModel = new ConfModel();
-            confModel.Curr_num_of_participants = GetCurrNum(Convert.ToInt32(confpartModel.Conf_id));
-            confModel.Curr_num_of_participants++;
+                var confModel = new ConfModel();
+                confModel.Curr_num_of_participants = curr;
+                confModel.Curr_num_of_participants++;
 
-            string query = $"UPDATE Conferences SET curr_num_of_participants=" + confModel.Curr_num_of_participants + " WHERE conf_id=" + confpartModel.Conf_id;
-            using (var connection = new SQLiteConnection(connectionString))
-            {
-                connection.Open();
-                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                string query = $"UPDATE Conferences SET curr_num_of_participants=" + confModel.Curr_num_of_participants + " WHERE conf_id=" + confpartModel.Conf_id;
+                using (var connection = new SQLiteConnection(connectionString))
                 {
-                    command.ExecuteNonQuery();
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
-                connection.Close();
             }
+            else throw new Exception("Мест на конференцию больше нет!");
 
         }
 
@@ -548,6 +554,27 @@ namespace Курсач._Repository
         {
             int count = 0;
             string query = $"SELECT curr_num_of_participants FROM Conferences WHERE conf_id=" + conf_id;
+            using (var connection = new SQLiteConnection(connectionString))
+            using (SQLiteCommand command = new SQLiteCommand(query, connection))
+            {
+                connection.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        count = Convert.ToInt32(reader[0]);
+                    }
+                }
+                connection.Close();
+            }
+            return count;
+        }
+
+        private int GetMaxNum(int conf_id)
+        {
+            int count = 0;
+            string query = $"SELECT max_num_of_participants FROM Conferences WHERE conf_id=" + conf_id;
             using (var connection = new SQLiteConnection(connectionString))
             using (SQLiteCommand command = new SQLiteCommand(query, connection))
             {
