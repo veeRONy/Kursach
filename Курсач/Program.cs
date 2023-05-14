@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Курсач.Models;
 using Курсач.Views;
-using Курсач.Presenters;
 using Курсач._Repository;
 using System.Configuration;
 using System.ComponentModel.Design;

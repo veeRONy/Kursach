@@ -69,9 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events.cs" />
+    <Compile Include="Presenter.cs" />
     <Compile Include="Models\ConfModel.cs" />
     <Compile Include="Models\Conf_Part_Model.cs" />
+    <Compile Include="Presenters\ConfPresenter.cs" />
+    <Compile Include="Presenters\OrgPresenter.cs" />
+    <Compile Include="Presenters\PartPresenter.cs" />
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,10 +84,10 @@
     <Compile Include="_Repository\IRepository.cs" />
     <Compile Include="Models\OrgModel.cs" />
     <Compile Include="Models\ParticipantModel.cs" />
-    <Compile Include="Presenters\_Validator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Repository\Repository.cs" />
+    <Compile Include="_Validator.cs" />
     <None Include="Resources\users-alt.png" />
     <None Include="Resources\organizer.png" />
     <None Include="Resources\conf.png" />

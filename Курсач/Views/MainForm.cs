@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Курсач._Repository;
 using Курсач.Models;
-
+using Курсач.Presenters;
 
 namespace Курсач.Views
 {
@@ -42,7 +42,10 @@ namespace Курсач.Views
             orgList = new List<OrgModel>();
             confpartList = new List<Conf_Part_Model>();
 
-            new Events(this);
+            //new Presenter(this);
+            new ConfPresenter(this);
+            new OrgPresenter(this);
+            new PartPresenter(this);
 
             LoadAllConfList();
             LoadAllOrgList();
@@ -59,6 +62,10 @@ namespace Курсач.Views
             tabControlDB.TabPages.Remove(tabPageOrgDetail);
             tabControlDB.TabPages.Remove(tabPageReg);
             tabControlDB.TabPages.Remove(tabPagePartDetail);
+
+            btnParticipants.Enabled = true;
+            btnDB.Enabled = false;
+            btnOrganizers.Enabled = true;
 
             btnAdd.Click += delegate
             {
@@ -371,6 +378,9 @@ namespace Курсач.Views
             tabControlDB.TabPages.Remove(tabPageOrgDetail);
             tabControlDB.TabPages.Remove(tabPageReg);
             tabControlDB.TabPages.Remove(tabPagePartDetail);
+            btnParticipants.Enabled = false;
+            btnDB.Enabled = true;
+            btnOrganizers.Enabled = true;
         }
 
         private void btnDB_Click(object sender, EventArgs e)
@@ -385,6 +395,9 @@ namespace Курсач.Views
             tabControlDB.TabPages.Remove(tabPageOrgDetail);
             tabControlDB.TabPages.Remove(tabPageReg);
             tabControlDB.TabPages.Remove(tabPagePartDetail);
+            btnParticipants.Enabled = true;
+            btnDB.Enabled = false;
+            btnOrganizers.Enabled = true;
         }
 
         private void btnOrganizers_Click(object sender, EventArgs e)
@@ -399,6 +412,9 @@ namespace Курсач.Views
             tabControlDB.TabPages.Remove(tabPageOrgDetail);
             tabControlDB.TabPages.Remove(tabPageReg);
             tabControlDB.TabPages.Remove(tabPagePartDetail);
+            btnParticipants.Enabled = true;
+            btnDB.Enabled = true;
+            btnOrganizers.Enabled = false;
         }
 
 
@@ -589,5 +605,7 @@ namespace Курсач.Views
                 cbConfs.Items.Add(conf.Conf_id);
             }
         }
+
+      
     }
 }

@@ -1,139 +1,115 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using Курсач._Repository;
 using Курсач.Models;
 using Курсач.Views;
 
 namespace Курсач.Presenters
 {
-    public class OrgPresenter: Presenter
+    public class OrgPresenter: _Validator
     {
-        private IOrgView orgView;
-        private IRepository repository;
-        private BindingSource orgsbindingSource;
-        private IEnumerable<OrgModel> orgList;
+        MainForm form;
 
-        public OrgPresenter(IOrgView orgView, IRepository repository)
+        public OrgPresenter(MainForm form)
         {
-            this.orgView = orgView;
-            this.repository = repository;
-            this.orgsbindingSource = new BindingSource();
-
-            this.orgView.SearchEvent += SearchOrg;
-            this.orgView.AddEvent += AddOrg;
-            this.orgView.EditEvent += LoadSelectedOrgToEdit;
-            this.orgView.DeleteEvent += DeleteSelectedOrg;
-            this.orgView.SaveEvent += SaveOrg;
-            this.orgView.CancelEvent += CancelAction;
-
-            orgView.IsEdit = false;
-
-            this.orgView.SetOrgsListBindingSource(orgsbindingSource);
-            LoadAllOrgList();
-            this.orgView.Show();
+            this.form = form;
+            form.AddOrgEvent += AddOrg;
+            form.CancelOrgEvent += CancelOrg;
+            form.EditOrgEvent += EditOrg;
+            form.DeleteOrgEvent += DeleteOrg;
+            form.SaveOrgEvent += SaveOrg;
+            form.SearchOrgEvent += SearchOrg;
         }
 
-        private void CancelAction(object sender, EventArgs e)
+        private void SearchOrg(object sender, EventArgs e)
         {
-            CleanViewFields();
-        }
-
-        private void CleanViewFields()
-        {
-            orgView.org_id = 0;
-            orgView.org_surname = "";
-            orgView.org_name = "";
-            orgView.org_company = "";
-            orgView.org_email = "";
+            bool emptyValue = string.IsNullOrWhiteSpace(form.SearchValueOrg);
+            if (emptyValue == false)
+            {
+                form.orgList = form.repository.GetByValueOrgs(form.SearchValueOrg);
+            }
+            else
+                form.orgList = form.repository.GetAllOrgs();
+            form.orgsbindingSource.DataSource = form.orgList;
         }
 
         private void SaveOrg(object sender, EventArgs e)
         {
             var model = new OrgModel();
-            model.Org_id = orgView.org_id;
-            model.Org_surname = orgView.org_surname;
-            model.Org_name = orgView.org_name;
-            model.Org_company = orgView.org_company;
-            model.Org_email = orgView.org_email;
+            model.Org_id = form.org_id;
+            model.Org_surname = form.org_surname;
+            model.Org_name = form.org_name;
+            model.Org_company = form.org_company;
+            model.Org_email = form.org_email;
 
             try
             {
                 Validate(model);
-                if (orgView.IsEdit)
+                if (form.IsEdit)
                 {
-                    repository.EditOrg(model);
-                    orgView.Message = "Данные организатора успешно изменены.";
+                    form.repository.EditOrg(model);
+                    form.Message = "Данные организатора успешно изменены.";
                 }
                 else
                 {
-                    repository.AddOrg(model);
-                    orgView.Message = "Организатор успешно добавлен.";
+                    form.repository.AddOrg(model);
+                    form.Message = "Организатор успешно добавлен.";
                 }
-                orgView.IsSuccess = true;
-                LoadAllOrgList();
+                form.IsSuccess = true;
+                form.LoadAllOrgList();
             }
             catch (Exception ex)
             {
-                orgView.IsSuccess = false;
-                orgView.Message = ex.Message;
+                form.IsSuccess = false;
+                form.Message = ex.Message;
             }
         }
 
-        private void DeleteSelectedOrg(object sender, EventArgs e)
+        private void DeleteOrg(object sender, EventArgs e)
         {
             try
             {
-                var org = (OrgModel)orgsbindingSource.Current;
-                repository.DeleteOrg(org.Org_id);
-                orgView.IsSuccess = true;
-                orgView.Message = "Данные организатора успешно удалены.";
-                LoadAllOrgList();
+                var org = (OrgModel)form.orgsbindingSource.Current;
+                form.repository.DeleteOrg(org.Org_id);
+                form.IsSuccess = true;
+                form.Message = "Данные организатора успешно удалены.";
+                form.LoadAllOrgList();
+                form.LoadAllConfList();
+                form.LoadAllConfPartList();
             }
             catch
             {
-                orgView.IsSuccess = false;
-                orgView.Message = "Ошибка! Данные организатора не были удалены.";
+                form.IsSuccess = false;
+                form.Message = "Ошибка! Данные организатора не были удалены.";
             }
         }
 
-        private void LoadSelectedOrgToEdit(object sender, EventArgs e)
+        private void EditOrg(object sender, EventArgs e)
         {
-            var org = (OrgModel)orgsbindingSource.Current;
-            orgView.org_id = org.Org_id;
-            orgView.org_surname = org.Org_surname;
-            orgView.org_name = org.Org_name;
-            orgView.org_company = org.Org_company;
-            orgView.org_email = org.Org_email;
-            orgView.IsEdit = true;
+            var org = (OrgModel)form.orgsbindingSource.Current;
+            form.org_id = org.Org_id;
+            form.org_surname = org.Org_surname;
+            form.org_name = org.Org_name;
+            form.org_company = org.Org_company;
+            form.org_email = org.Org_email;
+            form.IsEdit = true;
+        }
+
+        private void CancelOrg(object sender, EventArgs e)
+        {
+            form.org_id = 0;
+            form.org_surname = "";
+            form.org_name = "";
+            form.org_company = "";
+            form.org_email = "";
         }
 
         private void AddOrg(object sender, EventArgs e)
         {
-            CleanViewFields();
-            orgView.IsEdit = false;
-        }
-
-        private void SearchOrg(object sender, EventArgs e)
-        {
-            bool emptyValue = string.IsNullOrWhiteSpace(this.orgView.SearchValue);
-            if (emptyValue == false)
-            {
-                orgList = repository.GetByValueOrgs(this.orgView.SearchValue);
-            }
-            else
-                orgList = repository.GetAllOrgs();
-            orgsbindingSource.DataSource = orgList;
-        }
-
-        private void LoadAllOrgList()
-        {
-            orgList = repository.GetAllOrgs();
-            orgsbindingSource.DataSource = orgList;
+            form.IsEdit = false;
+            CancelOrg(sender, e);
         }
     }
 }
