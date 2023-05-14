@@ -411,6 +411,7 @@
             // cbOrgs
             // 
             this.cbOrgs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbOrgs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbOrgs.FormatString = "N0";
             this.cbOrgs.FormattingEnabled = true;
@@ -1207,6 +1208,7 @@
             // cbConfs
             // 
             this.cbConfs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbConfs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbConfs.FormattingEnabled = true;
             this.cbConfs.Location = new System.Drawing.Point(302, 197);
             this.cbConfs.Name = "cbConfs";
@@ -1273,7 +1275,7 @@
             this.dataGridViewConf_Part.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewConf_Part.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
             this.dataGridViewConf_Part.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridViewConf_Part.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridViewConf_Part.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridViewConf_Part.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewConf_Part.Location = new System.Drawing.Point(36, 39);
             this.dataGridViewConf_Part.Name = "dataGridViewConf_Part";

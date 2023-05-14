@@ -69,7 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenter.cs" />
     <Compile Include="Models\ConfModel.cs" />
     <Compile Include="Models\Conf_Part_Model.cs" />
     <Compile Include="Presenters\ConfPresenter.cs" />

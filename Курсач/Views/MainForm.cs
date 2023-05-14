@@ -42,7 +42,7 @@ namespace Курсач.Views
             orgList = new List<OrgModel>();
             confpartList = new List<Conf_Part_Model>();
 
-            //new Presenter(this);
+
             new ConfPresenter(this);
             new OrgPresenter(this);
             new PartPresenter(this);
@@ -66,6 +66,7 @@ namespace Курсач.Views
             btnParticipants.Enabled = true;
             btnDB.Enabled = false;
             btnOrganizers.Enabled = true;
+
 
             btnAdd.Click += delegate
             {

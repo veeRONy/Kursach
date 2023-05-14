@@ -146,6 +146,7 @@ namespace Курсач._Repository
         {
             var confList = new List<ConfModel>();
             int confID = int.TryParse(value, out _) ? Convert.ToInt32(value) : 0;
+            string topic = value;
 
             using (var connection = new SQLiteConnection(connectionString))
             {
@@ -153,8 +154,10 @@ namespace Курсач._Repository
                 using (var command = new SQLiteCommand(connection))
                 {
 
-                    command.CommandText = @"SELECT * FROM Conferences WHERE conf_id=@id ORDER BY conf_id DESC";
+                    command.CommandText = @"SELECT * FROM Conferences WHERE 
+                                           (conf_id=@id  OR conf_topic like @topic) ORDER BY conf_id DESC";
                     command.Parameters.Add("@id", System.Data.DbType.Int32).Value = confID;
+                    command.Parameters.AddWithValue("@topic", "%" + topic + "%");
 
                     using (var reader = command.ExecuteReader())
                     {
@@ -353,13 +356,19 @@ namespace Курсач._Repository
         {
             var orgList = new List<OrgModel>();
             int orgID = int.TryParse(value, out _) ? Convert.ToInt32(value) : 0;
+            string orgSurname = value;
+            string orgName = value;
 
             using (var connection = new SQLiteConnection(connectionString))
             using (SQLiteCommand command = new SQLiteCommand(connection))
             {
                 connection.Open();
-                command.CommandText = @"SELECT * FROM Organizers WHERE org_id=@id ORDER BY org_id ASC";
+                command.CommandText = @"SELECT * FROM Organizers WHERE
+                                        (org_id=@id OR (org_surname like @surname
+                                         OR org_name like @name)) ORDER BY org_id ASC";
                 command.Parameters.Add("@id", System.Data.DbType.Int32).Value = orgID;
+                command.Parameters.AddWithValue("@surname", "%" + orgSurname + "%");
+                command.Parameters.AddWithValue("@name", "%" + orgName + "%");
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -671,14 +680,20 @@ namespace Курсач._Repository
         {
             var partList = new List<ParticipantModel>();
             int partID = int.TryParse(value, out _) ? Convert.ToInt32(value) : 0;
-
+            string partSurname = value;
+            string partName = value;
 
             using (var connection = new SQLiteConnection(connectionString))
             using (SQLiteCommand command = new SQLiteCommand(connection))
             {
                 connection.Open();
-                command.CommandText = @"SELECT * FROM Participants WHERE participant_id=@id ORDER BY participant_id ASC";
+                command.CommandText =  @"SELECT * FROM Participants WHERE (participant_id=@id 
+                                        OR (participant_surname like @surname 
+                                        OR participant_name like @name)) ORDER BY participant_id ASC";
                 command.Parameters.Add("@id", System.Data.DbType.Int32).Value = partID;
+
+                command.Parameters.AddWithValue("@surname", "%" + partSurname + "%");
+                command.Parameters.AddWithValue("@name", "%" + partName + "%");
 
                 using (var reader = command.ExecuteReader())
                 {
