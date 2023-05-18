@@ -35,6 +35,5 @@ namespace Курсач.Models
         [DisplayName("E-mail")]
         [Required(ErrorMessage = "Требуется e-mail")]
         public string Org_email { get => org_email; set => org_email = value; }
-
     }
 }

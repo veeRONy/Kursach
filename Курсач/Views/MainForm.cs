@@ -28,24 +28,22 @@ namespace Курсач.Views
         public IEnumerable<ConfModel> confList;
         public IEnumerable<ParticipantModel> partList;
         public IEnumerable<OrgModel> orgList;
-        public IEnumerable<Conf_Part_Model> confpartList;
+        public IEnumerable<ConfPartModel> confpartList;
 
         public MainForm()
         {
             InitializeComponent();
             SetBindingSources();
             repository = new Repository(ConfigurationManager.ConnectionStrings["SqliteConnectionString"].ConnectionString);
-            
 
             confList = new List<ConfModel>();
             partList = new List<ParticipantModel>();
             orgList = new List<OrgModel>();
-            confpartList = new List<Conf_Part_Model>();
+            confpartList = new List<ConfPartModel>();
 
-
-            new ConfPresenter(this);
-            new OrgPresenter(this);
-            new PartPresenter(this);
+            new ConfController(this);
+            new OrgController(this);
+            new PartController(this);
 
             LoadAllConfList();
             LoadAllOrgList();
@@ -67,7 +65,6 @@ namespace Курсач.Views
             btnDB.Enabled = false;
             btnOrganizers.Enabled = true;
 
-
             btnAdd.Click += delegate
             {
                 GetOrgs();
@@ -75,14 +72,12 @@ namespace Курсач.Views
                 tabControlDB.TabPages.Add(tabPageConfDetail);
                 tabControlDB.TabPages.Remove(tabPageConfs);
             };
-
             btnAddOrg.Click += delegate
             {
                 AddOrgEvent?.Invoke(this, EventArgs.Empty);
                 tabControlDB.TabPages.Add(tabPageOrgDetail);
                 tabControlDB.TabPages.Remove(tabPageOrgs);
             };
-
             btnAddPart.Click += delegate
             {
                 AddPartEvent?.Invoke(this, EventArgs.Empty);
@@ -91,21 +86,18 @@ namespace Курсач.Views
                 tabControlDB.TabPages.Remove(tabPageConfPart);
                 tabControlDB.TabPages.Remove(tabPageReg);
             };
-
             btnCancelConf.Click += delegate
             {
                 CancelConfEvent?.Invoke(this, EventArgs.Empty);
                 tabControlDB.TabPages.Add(tabPageConfs);
                 tabControlDB.TabPages.Remove(tabPageConfDetail);
             };
-
             btnCancelOrg.Click += delegate
             {
                 CancelOrgEvent?.Invoke(this, EventArgs.Empty);
                 tabControlDB.TabPages.Remove(tabPageOrgDetail);
                 tabControlDB.TabPages.Add(tabPageOrgs);
             };
-
             btnCancelPart.Click += delegate
             {
                 CancelPartEvent?.Invoke(this, EventArgs.Empty);
@@ -113,7 +105,6 @@ namespace Курсач.Views
                 tabControlDB.TabPages.Add(tabPageParts);
                 tabControlDB.TabPages.Add(tabPageConfPart);
             };
-
             btnCancelReg.Click += delegate
             {
                 CancelRegEvent?.Invoke(this, EventArgs.Empty);
@@ -122,7 +113,6 @@ namespace Курсач.Views
                 tabControlDB.TabPages.Add(tabPageParts);
                 tabControlDB.TabPages.Add(tabPageConfPart);
             };
-
             btnEdit.Click += delegate 
             {
                 GetOrgs();
@@ -130,7 +120,6 @@ namespace Курсач.Views
                 tabControlDB.TabPages.Add(tabPageConfDetail);
                 tabControlDB.TabPages.Remove(tabPageConfs);
             };
-
             btnEditPart.Click += delegate 
             {
                 EditPartEvent?.Invoke(this, EventArgs.Empty);
@@ -139,14 +128,12 @@ namespace Курсач.Views
                 tabControlDB.TabPages.Remove(tabPageConfPart);
                 tabControlDB.TabPages.Remove(tabPageReg);
             };
-
             btnEditOrg.Click += delegate
             {
                 EditOrgEvent?.Invoke(this, EventArgs.Empty);
                 tabControlDB.TabPages.Add(tabPageOrgDetail);
                 tabControlDB.TabPages.Remove(tabPageOrgs);
             };
-
             btnDelete.Click += delegate
             {
                 var result = MessageBox.Show("Вы уверены, что хотите удалить конференцию?", "Warning",
@@ -157,7 +144,6 @@ namespace Курсач.Views
                     MessageBox.Show(Message);
                 }
             };
-
             btnDeletePart.Click += delegate
             {
                 var result = MessageBox.Show("Вы уверены, что хотите удалить участника?", "Warning",
@@ -168,7 +154,6 @@ namespace Курсач.Views
                     MessageBox.Show(Message);
                 }
             };
-
             btnDeleteOrg.Click += delegate
             {
                 var result = MessageBox.Show("Вы уверены, что хотите удалить данные организатора?", "Warning",
@@ -179,7 +164,6 @@ namespace Курсач.Views
                     MessageBox.Show(Message);
                 }
             };
-
             btnDeleteReg.Click += delegate
             {
                 var result = MessageBox.Show("Вы уверены, что хотите удалить регистрацию участника?", "Warning",
@@ -190,7 +174,6 @@ namespace Курсач.Views
                     MessageBox.Show(Message);
                 }
             };
-
             btnSaveConf.Click += delegate
             {
                 SaveConfEvent?.Invoke(this, EventArgs.Empty);
@@ -201,7 +184,6 @@ namespace Курсач.Views
                 }
                 MessageBox.Show(Message);
             };
-
             btnSavePart.Click += delegate
             {
                 SavePartEvent?.Invoke(this, EventArgs.Empty);
@@ -214,7 +196,6 @@ namespace Курсач.Views
                 }
                 MessageBox.Show(Message);
             };
-
             btnSaveOrg.Click += delegate
             {
                 SaveOrgEvent?.Invoke(this, EventArgs.Empty);
@@ -225,7 +206,6 @@ namespace Курсач.Views
                 }
                 MessageBox.Show(Message);
             };
-
             btnSaveReg.Click += delegate
             {
                 SaveRegEvent?.Invoke(this, EventArgs.Empty);
@@ -238,13 +218,11 @@ namespace Курсач.Views
                 }
                 MessageBox.Show(Message);
             };
-
             btnSearch.Click += delegate{ SearchConfEvent?.Invoke(this, EventArgs.Empty);};
 
             btnSearchPart.Click += delegate{SearchPartEvent?.Invoke(this, EventArgs.Empty);};
 
             btnSearchOrg.Click += delegate{SearchOrgEvent?.Invoke(this, EventArgs.Empty);};
-
 
             btnReg.Click += delegate
             {
@@ -255,25 +233,21 @@ namespace Курсач.Views
                 tabControlDB.TabPages.Remove(tabPagePartDetail);
                 tabControlDB.TabPages.Remove(tabPageConfPart);
             };
-
             tbSearchConf.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
                     SearchConfEvent?.Invoke(this, EventArgs.Empty);
             };
-
             tbSearchPart.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
                     SearchPartEvent?.Invoke(this, EventArgs.Empty);
             };
-
             tbSearchOrg.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
                     SearchOrgEvent?.Invoke(this, EventArgs.Empty);
             };
-
         }
 
         public event EventHandler SearchConfEvent;
@@ -309,25 +283,21 @@ namespace Курсач.Views
             confpartList = repository.GetAllConfPart();
             confpartbindingsource.DataSource = confpartList;
         }
-
         public void LoadAllPartList()
         {
             partList = repository.GetAllParts();
             partsbindingSource.DataSource = partList;
         }
-
         public void LoadAllOrgList()
         {
             orgList = repository.GetAllOrgs();
             orgsbindingSource.DataSource = orgList;
         }
-
         public void LoadAllConfList()
         {
             confList = repository.GetAllConfs();
             confsbindingSource.DataSource = confList;
         }
-
         private void SetBindingSources()
         {
             this.confsbindingSource = new BindingSource();
@@ -343,8 +313,6 @@ namespace Курсач.Views
             dataGridViewConf_Part.DataSource = confpartbindingsource;
         }
 
-       
-
         private void ActivateButton(object btnsender)
         {
             if (btnsender != null)
@@ -355,7 +323,6 @@ namespace Курсач.Views
                     currentBtn.BackColor = Color.FromArgb(207, 6, 53);
                 }
         }
-
         private void DisableButton()
         {
             foreach (Control prevbtn in panelMenu.Controls)
@@ -366,7 +333,6 @@ namespace Курсач.Views
                 }
             }
         }
-
         private void btnParticipants_Click(object sender, EventArgs e)
         {
             labelTitle.Text = "Участники";
@@ -383,7 +349,6 @@ namespace Курсач.Views
             btnDB.Enabled = true;
             btnOrganizers.Enabled = true;
         }
-
         private void btnDB_Click(object sender, EventArgs e)
         {
             labelTitle.Text = "Конференции";
@@ -400,7 +365,6 @@ namespace Курсач.Views
             btnDB.Enabled = false;
             btnOrganizers.Enabled = true;
         }
-
         private void btnOrganizers_Click(object sender, EventArgs e)
         {
             labelTitle.Text = "Организаторы";
@@ -418,11 +382,7 @@ namespace Курсач.Views
             btnOrganizers.Enabled = false;
         }
 
-
-
-        
-
-        
+  
 
         // ---------------------Конференция-----------------------//
         public int conf_id
@@ -456,7 +416,6 @@ namespace Курсач.Views
             get { return tbConfAddress.Text; }
             set { tbConfAddress.Text = value; }
         }
-
         public int max_num_of_participants
         {
             get { return Convert.ToInt32(tbConfMax.Text); }
@@ -467,7 +426,6 @@ namespace Курсач.Views
             get { return tbSearchConf.Text; }
             set { tbSearchConf.Text = value; }
         }
-
 
 
         //---------------------Участники----------------------------------//
@@ -486,20 +444,16 @@ namespace Курсач.Views
             get { return tbPartName.Text; }
             set { tbPartName.Text = value; }
         }
-
         public string part_email
         {
             get { return tbPartEmail.Text; }
             set { tbPartEmail.Text = value; }
         }
-
         public string SearchValuePart
         {
             get { return tbSearchPart.Text; }
             set { tbSearchPart.Text = value; }
         }
-
-
 
 
         //-------------------------Организаторы-----------------------//
@@ -536,7 +490,7 @@ namespace Курсач.Views
         }
 
 
-        //---------------Конф-Уч----------------------//
+        //---------------Conf-Participant----------------------//
 
         public string CONF_ID
         {
@@ -555,7 +509,6 @@ namespace Курсач.Views
         }
 
 
-
         //-----------------------------------------------//
         //-----------------------------------------------//
 
@@ -563,7 +516,6 @@ namespace Курсач.Views
         private string message;
         private bool isSuccess;
         private bool isEdit;
-
         public bool IsEdit
         {
             get { return isEdit; }
@@ -580,8 +532,6 @@ namespace Курсач.Views
             set { message = value; }
         }
 
-
-
         public void GetOrgs()
         {
             IEnumerable<OrgModel> orgList = new List<OrgModel>();
@@ -593,7 +543,6 @@ namespace Курсач.Views
                 cbOrgs.Items.Add(org.Org_id);
             }
         }
-
         public void GetConfs()
         {
             IEnumerable<ConfModel> confList = new List<ConfModel>();
@@ -606,7 +555,5 @@ namespace Курсач.Views
                 cbConfs.Items.Add(conf.Conf_id);
             }
         }
-
-      
     }
 }
